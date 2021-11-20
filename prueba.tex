@@ -11,6 +11,9 @@
 \usepackage{minted}
 \usemintedstyle{solarized-dark}
 
+%alternative for source code
+\usepackage{listings}
+
 % for Systemctl's "box" unicode symbols
 \usepackage{pmboxdraw}
 
@@ -103,6 +106,25 @@ CREATE TABLE Persons (
 );
 \end{minted}
 
+Ejemplo de listings
+\lstset{backgroundcolor=\color{gray}, frame=tlb}
+\begin{lstlisting}[language={C}]
+int main(){
+  return 0;
+}
+\end{lstlisting}
+
+Ejemplo de listings 2
+
+\begin{lstlisting}[language={SQL}]
+CREATE TABLE Persons (
+    PersonID int,
+    LastName varchar(255),
+    FirstName varchar(255),
+    Address varchar(255),
+    City varchar(255)
+);
+\end{lstlisting}
 
 
 
