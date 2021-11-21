@@ -1,11 +1,29 @@
 \documentclass[12pt,a4paper,openany]{book}
+
 \usepackage[left=2cm,right=2cm,top=2cm,bottom=2cm]{geometry}
 \usepackage[utf8]{inputenc}
 \usepackage[spanish]{babel}
-%\usepackage{amsmath}
-%\usepackage{amsfonts}
-%\usepackage{amssymb}
+
 \usepackage[hidelinks]{hyperref} %links in TOC
+
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+
+% Changing the default header and footer for the book
+\fancypagestyle{plain}{
+	\fancyhead{} % clear all header fields
+	\fancyfoot{} % clear all footer fields
+	\fancyfoot[LE,RO]{\thepage}
+	\renewcommand{\headrulewidth}{0pt}
+	\renewcommand{\footrulewidth}{0.4pt}
+}
+\fancyhead[]{} % clear all header fields
+\fancyfoot{} % clear all footer fields
+\fancyfoot[LE,RO]{\thepage}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0.4pt}
+
+
 \usepackage{kpfonts}
 
 % for Systemctl's "box" unicode symbols
