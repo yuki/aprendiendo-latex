@@ -1,4 +1,5 @@
 \documentclass[12pt,a4paper,openany]{book}
+\usepackage[left=2cm,right=2cm,top=2cm,bottom=2cm]{geometry}
 \usepackage[utf8]{inputenc}
 \usepackage[spanish]{babel}
 %\usepackage{amsmath}
@@ -7,31 +8,36 @@
 \usepackage[hidelinks]{hyperref} %links in TOC
 \usepackage{kpfonts}
 
-%for source code. Python's Pygments package needed and "-shel-escape" into cli/Texmaker
-\usepackage{minted}
-\usemintedstyle{solarized-dark}
-
-%alternative for source code
-\usepackage{listings}
-
 % for Systemctl's "box" unicode symbols
 \usepackage{pmboxdraw}
 
-% for ystemctl's bullet 25CF unicode symbol
+% for Systemctl's bullet 25CF unicode symbol
 \usepackage{pifont} % for the black circle
 \DeclareUnicodeCharacter{25CF}{\resizebox{0.5em}{!}{\ding{108}}}
 
 
-% COLORs
+% color boxes
 \usepackage{tcolorbox}
+%\newtcolorbox[blend into=figures]{myfigure}[2][]{float=htb,title={#2},#1}
+
+%for source code. Python's Pygments package needed and "-shel-escape" into cli/Texmaker
+\tcbuselibrary{minted} %minted is integrated into tcolorbox
+\tcbset{listing engine=minted}
+%\usepackage{minted}
+\usemintedstyle{solarized-dark}
+
+
 \definecolor{solarizeddark}{HTML}{002b36}
 %\definecolor{solarizeddark}{HTML}{f0f0f0}
 
-
+%for images
+\usepackage{graphicx}
+\usepackage{wrapfig}
 
 
 \RequirePackage{blindtext} %for lorem ipsum
-\usepackage[left=2cm,right=2cm,top=2cm,bottom=2cm]{geometry}
+
+
 \author{Ruben Gomez}
 \title{Titulo}
 
@@ -96,7 +102,9 @@ Ejemplo de consola:
 \end{minted}
 
 Ejemplo de SQL, y con inline de mysql como prompt \mintinline[bgcolor=solarizeddark]{console}{ mysql> }
-\begin{minted}[bgcolor=solarizeddark]{mysql}
+
+\begin{tcolorbox}[arc=3mm,colback=solarizeddark,title=My heading line]
+	\begin{minted}{mysql}
 CREATE TABLE Persons (
     PersonID int,
     LastName varchar(255),
@@ -104,33 +112,82 @@ CREATE TABLE Persons (
     Address varchar(255),
     City varchar(255)
 );
-\end{minted}
-
-Ejemplo de listings
-\lstset{backgroundcolor=\color{gray}, frame=tlb}
-\begin{lstlisting}[language={C}]
-int main(){
-  return 0;
-}
-\end{lstlisting}
-
-Ejemplo de listings 2
-
-\begin{lstlisting}[language={SQL}]
-CREATE TABLE Persons (
-    PersonID int,
-    LastName varchar(255),
-    FirstName varchar(255),
-    Address varchar(255),
-    City varchar(255)
-);
-\end{lstlisting}
+	\end{minted}
+\end{tcolorbox}
 
 
+%Ejemplo de listings
+%%\lstset{backgroundcolor=\color{gray}, frame=tlb}
+%\begin{lstlisting}[language={C}]
+%int main(){
+%  return 0;
+%}
+%\end{lstlisting}
+%
+%%Ejemplo de listings 2
+%
+%\begin{tcolorbox}[title=My heading line]
+%	\begin{lstlisting}[language={SQL}]
+%	CREATE TABLE Persons (
+%	    PersonID int,
+%	    LastName varchar(255),
+%	    FirstName varchar(255),
+%	    Address varchar(255),
+%	    City varchar(255)
+%	);
+%	\end{lstlisting}
+%\end{tcolorbox}
 
-\Blindtext[3]
-\section{secci 1}
-\Blindtext[3]
+
+
+\section{Imágenes}
+\begin{wrapfigure}{r}{0.15\textwidth} %this figure will be at the right
+    \centering %para centrar la imagen en el hueco
+    \vspace{-10pt} %para alinear la imagen con la parte alta del texto
+    \includegraphics[width=0.15\textwidth]{img/openlogo-nd.png}
+\end{wrapfigure}\Blindtext[1]
+
+
+\begin{wrapfigure}{l}{0.15\textwidth} %this figure will be at the left
+    \centering
+    \includegraphics[width=0.15\textwidth]{img/openlogo-nd.png}
+\end{wrapfigure}\Blindtext[1]
+
+
+
+\begin{figure}
+	\centering
+	\includegraphics[width=0.5\textwidth]{img/openlogo-nd.png}
+	\caption{Ejemplo de figura centrada}
+	\label{fig:logo}
+\end{figure}
+
+\begin{tcolorbox}{Some title for these equations}
+\[ \sin^2x+\cos^2x=1\]
+
+\[ 1 + \frac{1}{\tan^2x}=\frac{1}{\sin^2x}\]
+\end{tcolorbox}
+
+%\begin{myfigure}{Some title for these equations}
+%\[ \sin^2x+\cos^2x=1\]
+%
+%\[ 1 + \frac{1}{\tan^2x}=\frac{1}{\sin^2x}\]
+%\end{myfigure}
+
+\begin{tcolorbox}
+	\centering
+	\includegraphics[width=0.5\textwidth]{img/openlogo-nd.png}
+\end{tcolorbox}
+
+
+
+Ahora vamos a hacer una referencia a la figura \ref{fig:logo} y ver cómo queda y si hago referencia a \pageref{fig:logo} qué sale?
+
+%\includegraphics[width=\textwidth]{img/openlogo-nd.png}	
+
+\Blindtext[1]
+
+
 \subsection{sub1}
 \Blindtext[3]
 \subsubsection{sub sub 1}
