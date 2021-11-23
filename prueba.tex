@@ -9,20 +9,24 @@
 \usepackage{fancyhdr}
 \pagestyle{fancy}
 
+\setlength{\footskip}{1cm}
 % Changing the default header and footer for the book
 \fancypagestyle{plain}{
 	\fancyhead{} % clear all header fields
 	\fancyfoot{} % clear all footer fields
-	\fancyfoot[LE,RO]{\thepage}
+	\fancyfoot[LE,RO]{
+		\mintinline[bgcolor=solarizeddark,escapeinside=||]{console}{|\thepage|}}
 	\renewcommand{\headrulewidth}{0pt}
-	\renewcommand{\footrulewidth}{0.4pt}
+	\renewcommand{\footrulewidth}{0pt}
 }
 \fancyhead[]{} % clear all header fields
 \fancyfoot{} % clear all footer fields
 \fancyfoot[LE,RO]{\thepage}
 \renewcommand{\headrulewidth}{0pt}
-\renewcommand{\footrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0pt}
 
+\usepackage{sectsty}
+\sectionfont{\sf\sectionrule{0ex}{0pt}{-1ex}{1pt}}
 
 \usepackage{kpfonts}
 
@@ -38,11 +42,14 @@
 \usepackage{tcolorbox}
 %\newtcolorbox[blend into=figures]{myfigure}[2][]{float=htb,title={#2},#1}
 
+
 %for source code. Python's Pygments package needed and "-shel-escape" into cli/Texmaker
-\tcbuselibrary{minted} %minted is integrated into tcolorbox
+\tcbuselibrary{minted,poster,skins,raster,fitting,listings} %minted is integrated into tcolorbox
 \tcbset{listing engine=minted}
 %\usepackage{minted}
 \usemintedstyle{solarized-dark}
+
+
 
 
 \definecolor{solarizeddark}{HTML}{002b36}
@@ -54,6 +61,7 @@
 
 
 \RequirePackage{blindtext} %for lorem ipsum
+\usepackage{lipsum}
 
 
 \author{Ruben Gomez}
@@ -67,6 +75,7 @@
 \tableofcontents
 
 \part{ad}
+
 
 \chapter{Código fuente}
 Ejemplos de código fuente en distintos lenguajes usando \textbf{minted}:
@@ -97,6 +106,8 @@ nvme0n1     259:0    0 931,5G  0 disk
 
 \end{minted}
 
+
+
 Ejemplo de systemctl
 %see escaped information inside "||" using color green
 \begin{minted}[bgcolor=solarizeddark,escapeinside=||]{console}
@@ -114,12 +125,50 @@ Ejemplo de systemctl
 
 \end{minted}
 
+\begin{tcolorbox}[arc=3mm,colback=solarizeddark,title=My heading line,capture=minipage]
+\begin{minted}[bgcolor=solarizeddark,fontsize=\footnotesize]{mysql}
+mysql> show replicas;
++-----------+---------+------+-----------+--------------------------------------+
+| Server_Id | Host    | Port | Source_Id | Replica_UUID                         |
++-----------+---------+------+-----------+--------------------------------------+
+|         2 | server2 | 3306 |         1 | 9fb33895-4c78-11ec-b23b-525400f50be5 |
++-----------+---------+------+-----------+--------------------------------------+
+1 row in set (0,00 sec)
+\end{minted}
+\end{tcolorbox}
+
+\begin{tcolorbox}[arc=3mm,colback=solarizeddark,title=My heading line,capture=minipage]
+\begin{minted}[bgcolor=solarizeddark]{mysql}
+mysql> TOO MUCH?
++-----------+---------+------+-----------+--------------------------------------+
+| Server_Id | Host    | Port | Source_Id | Replica_UUID                         |
++-----------+---------+------+-----------+--------------------------------------+
+|         2 | server2 | 3306 |         1 | 9fb33895-4c78-11ec-b23b-525400f50be5 |
++-----------+---------+------+-----------+--------------------------------------+
+1 row in set (0,00 sec)
+\end{minted}
+\end{tcolorbox}
+
+\begin{tcolorbox}[capture=minipage]% needs the `fitting' library
+\lipsum[1]
+\end{tcolorbox}
+
+
 Ejemplo de consola: 	
 \begin{minted}[bgcolor=solarizeddark]{shell-session}
  sudo systemctl stop mysql
 \end{minted}
 
 Ejemplo de SQL, y con inline de mysql como prompt \mintinline[bgcolor=solarizeddark]{console}{ mysql> }
+
+
+\begin{tcolorbox}[arc=1mm,width=1cm,halign=center,valign=center,square]
+10
+\end{tcolorbox}
+
+
+
+
 
 \begin{tcolorbox}[arc=3mm,colback=solarizeddark,title=My heading line]
 	\begin{minted}{mysql}
@@ -175,7 +224,7 @@ CREATE TABLE Persons (
 
 \begin{figure}
 	\centering
-	\includegraphics[width=0.5\textwidth]{img/openlogo-nd.png}
+	\includegraphics[width=0.5\textwidth]{img/openlogo-nd.pdf}
 	\caption{Ejemplo de figura centrada}
 	\label{fig:logo}
 \end{figure}
@@ -186,28 +235,44 @@ CREATE TABLE Persons (
 \[ 1 + \frac{1}{\tan^2x}=\frac{1}{\sin^2x}\]
 \end{tcolorbox}
 
-%\begin{myfigure}{Some title for these equations}
-%\[ \sin^2x+\cos^2x=1\]
-%
-%\[ 1 + \frac{1}{\tan^2x}=\frac{1}{\sin^2x}\]
-%\end{myfigure}
 
 \begin{tcolorbox}
 	\centering
-	\includegraphics[width=0.5\textwidth]{img/openlogo-nd.png}
+	\includegraphics[width=0.5\textwidth]{img/openlogo-nd.pdf}
 \end{tcolorbox}
 
 
-
 Ahora vamos a hacer una referencia a la figura \ref{fig:logo} y ver cómo queda y si hago referencia a \pageref{fig:logo} qué sale?
-
+	
 %\includegraphics[width=\textwidth]{img/openlogo-nd.png}	
 
 \Blindtext[1]
 
 
-\subsection{sub1}
-\Blindtext[3]
+\subsection{Tablas}
+
+\begin{tabular}{|p{3cm}|p{10cm}|}
+\hline 
+fila 1 col1  & fila 1 col2 \\ 
+\hline 
+fila 2 col 1 & fila 2 col2  \\ 
+\hline 
+• & • \\ 
+\hline 
+• & • \\ 
+\hline 
+\end{tabular} 
+
+\begin{tabular}{|p{1cm}|c|}
+\hline 
+\rule[-1cm]{0pt}{1cm} qwe & asda \\ 
+\hline 
+\rule[-1ex]{0pt}{2.5ex} asd  & sasd \\ 
+\hline 
+\end{tabular} 
+
+
+
 \subsubsection{sub sub 1}
 \Blindtext[3]
 \paragraph{parag 1}
