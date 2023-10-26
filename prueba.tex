@@ -32,6 +32,7 @@
 
 % for Systemctl's "box" unicode symbols
 \usepackage{pmboxdraw}
+\usepackage{xcolor}
 
 % for Systemctl's bullet 25CF unicode symbol
 \usepackage{pifont} % for the black circle
@@ -45,6 +46,7 @@
 
 %for source code. Python's Pygments package needed and "-shel-escape" into cli/Texmaker
 \tcbuselibrary{minted,poster,skins,raster,fitting,listings} %minted is integrated into tcolorbox
+\tcbuselibrary{fitting}
 \tcbset{listing engine=minted}
 %\usepackage{minted}
 \usemintedstyle{solarized-dark}
@@ -125,19 +127,8 @@ Ejemplo de systemctl
 
 \end{minted}
 
-\begin{tcolorbox}[arc=3mm,colback=solarizeddark,title=My heading line,capture=minipage]
-\begin{minted}[bgcolor=solarizeddark,fontsize=\footnotesize]{mysql}
-mysql> show replicas;
-+-----------+---------+------+-----------+--------------------------------------+
-| Server_Id | Host    | Port | Source_Id | Replica_UUID                         |
-+-----------+---------+------+-----------+--------------------------------------+
-|         2 | server2 | 3306 |         1 | 9fb33895-4c78-11ec-b23b-525400f50be5 |
-+-----------+---------+------+-----------+--------------------------------------+
-1 row in set (0,00 sec)
-\end{minted}
-\end{tcolorbox}
 
-\begin{tcolorbox}[arc=3mm,colback=solarizeddark,title=My heading line,capture=minipage]
+\begin{tcolorbox}[arc=3mm,colback=solarizeddark,title=Código original,capture=minipage]
 \begin{minted}[bgcolor=solarizeddark]{mysql}
 mysql> TOO MUCH?
 +-----------+---------+------+-----------+--------------------------------------+
@@ -149,7 +140,39 @@ mysql> TOO MUCH?
 \end{minted}
 \end{tcolorbox}
 
-\begin{tcolorbox}[capture=minipage]% needs the `fitting' library
+
+
+
+\begin{tcolorbox}[arc=3mm,colback=solarizeddark,title=Código con letra cambiada,capture=minipage]
+\begin{minted}[bgcolor=solarizeddark,fontsize=\footnotesize]{MySQL}
+mysql> show replicas;
++-----------+---------+------+-----------+--------------------------------------+
+| Server_Id | Host    | Port | Source_Id | Replica_UUID                         |
++-----------+---------+------+-----------+--------------------------------------+
+|         2 | server2 | 3306 |         1 | 9fb33895-4c78-11ec-b23b-525400f50be5 |
++-----------+---------+------+-----------+--------------------------------------+
+1 row in set (0,00 sec)
+\end{minted}
+\end{tcolorbox}
+
+
+
+
+
+%\tcbset{colframe=blue!50!black,colback=red!10!white,
+%boxsep=0pt,top=1mm,bottom=1mm,left=1mm,right=1mm,
+%fit algorithm=hybrid*,raster equal skip=1mm}
+
+\begin{tcbraster}[colback=green!10!white,boxsep=1mm]
+\tcboxfit[height=4cm]{\Blindtext[3]}
+
+\end{tcbraster}
+
+
+\tcboxfit[height=4cm,title=With a title]{\Blindtext[3]}
+
+
+\begin{tcolorbox}[fit to height=2cm,colback=red!5!white, colframe=red!75!black,left=1mm, right=1mm,boxsep=0mm]% needs the `fitting' library
 \lipsum[1]
 \end{tcolorbox}
 
@@ -160,13 +183,6 @@ Ejemplo de consola:
 \end{minted}
 
 Ejemplo de SQL, y con inline de mysql como prompt \mintinline[bgcolor=solarizeddark]{console}{ mysql> }
-
-
-\begin{tcolorbox}[arc=1mm,width=1cm,halign=center,valign=center,square]
-10
-\end{tcolorbox}
-
-
 
 
 
